@@ -139,6 +139,30 @@ class FlutterUrovoScan {
   Future<Map<String, dynamic>?> piccApduTransmit(Uint8List cmd) {
     return FlutterUrovoScanPlatform.instance.piccApduTransmit(cmd);
   }
+
+  Future<String?> iccOpen(int slot, int cardType, int volt) {
+    return FlutterUrovoScanPlatform.instance.iccOpen(slot, cardType, volt);
+  }
+
+  Future<String?> iccClose() {
+    return FlutterUrovoScanPlatform.instance.iccClose();
+  }
+
+  Future<String?> iccDetect() {
+    return FlutterUrovoScanPlatform.instance.iccDetect();
+  }
+
+  Future<String?> iccActivate() {
+    return FlutterUrovoScanPlatform.instance.iccActivate();
+  }
+
+  Future<Map<String, dynamic>?> iccApduTransmit(Uint8List cmd) {
+    return FlutterUrovoScanPlatform.instance.iccApduTransmit(cmd);
+  }
+
+  Future<String?> iccDeactivate() {
+    return FlutterUrovoScanPlatform.instance.iccDeactivate();
+  }
 }
 
 class ScannerListener {

@@ -268,4 +268,87 @@ class MethodChannelFlutterUrovoScan extends FlutterUrovoScanPlatform {
       throw Exception('[MethodChannelError] ${e.toString()}');
     }
   }
+
+  @override
+  Future<String?> iccOpen(int slot, int cardType, int volt) async {
+    if (!Platform.isAndroid) {
+      throw Exception('Available only for Android');
+    }
+    try {
+      final result = await methodChannel.invokeMethod<String>('iccOpen', {
+        'slot': slot,
+        'cardType': cardType,
+        'volt': volt,
+      });
+      return result;
+    } catch (e) {
+      throw Exception('[MethodChannelError] ${e.toString()}');
+    }
+  }
+
+  @override
+  Future<String?> iccClose() async {
+    if (!Platform.isAndroid) {
+      throw Exception('Available only for Android');
+    }
+    try {
+      final result = await methodChannel.invokeMethod<String>('iccClose');
+      return result;
+    } catch (e) {
+      throw Exception('[MethodChannelError] ${e.toString()}');
+    }
+  }
+
+  @override
+  Future<String?> iccDetect() async {
+    if (!Platform.isAndroid) {
+      throw Exception('Available only for Android');
+    }
+    try {
+      final result = await methodChannel.invokeMethod<String>('iccDetect');
+      return result;
+    } catch (e) {
+      throw Exception('[MethodChannelError] ${e.toString()}');
+    }
+  }
+
+  @override
+  Future<String?> iccActivate() async {
+    if (!Platform.isAndroid) {
+      throw Exception('Available only for Android');
+    }
+    try {
+      final result = await methodChannel.invokeMethod<String>('iccActivate');
+      return result;
+    } catch (e) {
+      throw Exception('[MethodChannelError] ${e.toString()}');
+    }
+  }
+
+  @override
+  Future<Map<String, dynamic>?> iccApduTransmit(Uint8List cmd) async {
+    if (!Platform.isAndroid) {
+      throw Exception('Available only for Android');
+    }
+    try {
+      final result = await methodChannel.invokeMapMethod<String, dynamic>(
+          'iccApduTransmit', {'cmd': cmd});
+      return result;
+    } catch (e) {
+      throw Exception('[MethodChannelError] ${e.toString()}');
+    }
+  }
+
+  @override
+  Future<String?> iccDeactivate() async {
+    if (!Platform.isAndroid) {
+      throw Exception('Available only for Android');
+    }
+    try {
+      final result = await methodChannel.invokeMethod<String>('iccDeactivate');
+      return result;
+    } catch (e) {
+      throw Exception('[MethodChannelError] ${e.toString()}');
+    }
+  }
 }

@@ -7,3 +7,4 @@ A Flutter plugin for integrating **Urovo barcode scanners** with Android devices
 - 🔹 **Real-time barcode scanning** using Urovo SDK
 - 🔹 **Event-based scan results** via Flutter’s `EventChannel`
 - 🔹 **Easy integration** with Flutter apps
+- 🔹 **Access to PICC and ICC card readers** for smart card interactions
