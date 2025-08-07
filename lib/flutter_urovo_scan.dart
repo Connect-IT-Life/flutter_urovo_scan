@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
@@ -109,6 +110,34 @@ class FlutterUrovoScan {
   /// This function stops the scanning process.
   Future<String?> stopDecode() {
     return FlutterUrovoScanPlatform.instance.stopDecode();
+  }
+
+  Future<String?> piccOpen() {
+    return FlutterUrovoScanPlatform.instance.piccOpen();
+  }
+
+  Future<String?> piccClose() {
+    return FlutterUrovoScanPlatform.instance.piccClose();
+  }
+
+  Future<String?> piccRequest(String mode) {
+    return FlutterUrovoScanPlatform.instance.piccRequest(mode);
+  }
+
+  Future<String?> piccAntisel() {
+    return FlutterUrovoScanPlatform.instance.piccAntisel();
+  }
+
+  Future<String?> piccActivate() {
+    return FlutterUrovoScanPlatform.instance.piccActivate();
+  }
+
+  Future<String?> piccDeactivate(int mode) {
+    return FlutterUrovoScanPlatform.instance.piccDeactivate(mode);
+  }
+
+  Future<Map<String, dynamic>?> piccApduTransmit(Uint8List cmd) {
+    return FlutterUrovoScanPlatform.instance.piccApduTransmit(cmd);
   }
 }
 

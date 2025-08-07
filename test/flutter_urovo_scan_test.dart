@@ -1,3 +1,4 @@
+import 'dart:typed_data';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_urovo_scan/flutter_urovo_scan.dart';
 import 'package:flutter_urovo_scan/flutter_urovo_scan_platform_interface.dart';
@@ -42,6 +43,27 @@ class MockFlutterUrovoScanPlatform
 
   @override
   Future<String?> stopDecode() => Future.value('Success');
+
+  @override
+  Future<String?> piccOpen() => Future.value('Success');
+
+  @override
+  Future<String?> piccClose() => Future.value('Success');
+
+  @override
+  Future<String?> piccRequest(String mode) => Future.value('ATQ');
+
+  @override
+  Future<String?> piccAntisel() => Future.value('SN');
+
+  @override
+  Future<String?> piccActivate() => Future.value('Success');
+
+  @override
+  Future<String?> piccDeactivate(int mode) => Future.value('Success');
+
+  @override
+  Future<Map<String, dynamic>?> piccApduTransmit(Uint8List cmd) => Future.value({'rsp': [0], 'sw': [0,0]});
 }
 
 void main() {
@@ -136,5 +158,13 @@ void main() {
     FlutterUrovoScanPlatform.instance = fakePlatform;
 
     expect(await flutterUrovoScanPlugin.stopDecode(), 'Success');
+  });
+
+  test('piccOpen', () async {
+    FlutterUrovoScan flutterUrovoScanPlugin = FlutterUrovoScan();
+    MockFlutterUrovoScanPlatform fakePlatform = MockFlutterUrovoScanPlatform();
+    FlutterUrovoScanPlatform.instance = fakePlatform;
+
+    expect(await flutterUrovoScanPlugin.piccOpen(), 'Success');
   });
 }
