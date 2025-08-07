@@ -1,3 +1,4 @@
+import 'dart:typed_data';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 import 'flutter_urovo_scan_method_channel.dart';
@@ -69,5 +70,33 @@ abstract class FlutterUrovoScanPlatform extends PlatformInterface {
 
   Future<String?> stopDecode() {
     throw UnimplementedError('stopDecode() has not been implemented.');
+  }
+
+  Future<String?> piccOpen() {
+    throw UnimplementedError('piccOpen() has not been implemented.');
+  }
+
+  Future<String?> piccClose() {
+    throw UnimplementedError('piccClose() has not been implemented.');
+  }
+
+  Future<String?> piccRequest(String mode) {
+    throw UnimplementedError('piccRequest() has not been implemented.');
+  }
+
+  Future<String?> piccAntisel() {
+    throw UnimplementedError('piccAntisel() has not been implemented.');
+  }
+
+  Future<String?> piccActivate() {
+    throw UnimplementedError('piccActivate() has not been implemented.');
+  }
+
+  Future<String?> piccDeactivate(int mode) {
+    throw UnimplementedError('piccDeactivate() has not been implemented.');
+  }
+
+  Future<Map<String, dynamic>?> piccApduTransmit(Uint8List cmd) {
+    throw UnimplementedError('piccApduTransmit() has not been implemented.');
   }
 }

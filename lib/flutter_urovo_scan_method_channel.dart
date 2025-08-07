@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
@@ -171,6 +172,97 @@ class MethodChannelFlutterUrovoScan extends FlutterUrovoScanPlatform {
 
     try {
       final result = await methodChannel.invokeMethod<String>('stopDecode');
+      return result;
+    } catch (e) {
+      throw Exception('[MethodChannelError] ${e.toString()}');
+    }
+  }
+
+  @override
+  Future<String?> piccOpen() async {
+    if (!Platform.isAndroid) {
+      throw Exception('Available only for Android');
+    }
+    try {
+      final result = await methodChannel.invokeMethod<String>('piccOpen');
+      return result;
+    } catch (e) {
+      throw Exception('[MethodChannelError] ${e.toString()}');
+    }
+  }
+
+  @override
+  Future<String?> piccClose() async {
+    if (!Platform.isAndroid) {
+      throw Exception('Available only for Android');
+    }
+    try {
+      final result = await methodChannel.invokeMethod<String>('piccClose');
+      return result;
+    } catch (e) {
+      throw Exception('[MethodChannelError] ${e.toString()}');
+    }
+  }
+
+  @override
+  Future<String?> piccRequest(String mode) async {
+    if (!Platform.isAndroid) {
+      throw Exception('Available only for Android');
+    }
+    try {
+      final result = await methodChannel.invokeMethod<String>('piccRequest', {'mode': mode});
+      return result;
+    } catch (e) {
+      throw Exception('[MethodChannelError] ${e.toString()}');
+    }
+  }
+
+  @override
+  Future<String?> piccAntisel() async {
+    if (!Platform.isAndroid) {
+      throw Exception('Available only for Android');
+    }
+    try {
+      final result = await methodChannel.invokeMethod<String>('piccAntisel');
+      return result;
+    } catch (e) {
+      throw Exception('[MethodChannelError] ${e.toString()}');
+    }
+  }
+
+  @override
+  Future<String?> piccActivate() async {
+    if (!Platform.isAndroid) {
+      throw Exception('Available only for Android');
+    }
+    try {
+      final result = await methodChannel.invokeMethod<String>('piccActivate');
+      return result;
+    } catch (e) {
+      throw Exception('[MethodChannelError] ${e.toString()}');
+    }
+  }
+
+  @override
+  Future<String?> piccDeactivate(int mode) async {
+    if (!Platform.isAndroid) {
+      throw Exception('Available only for Android');
+    }
+    try {
+      final result = await methodChannel.invokeMethod<String>('piccDeactivate', {'mode': mode});
+      return result;
+    } catch (e) {
+      throw Exception('[MethodChannelError] ${e.toString()}');
+    }
+  }
+
+  @override
+  Future<Map<String, dynamic>?> piccApduTransmit(Uint8List cmd) async {
+    if (!Platform.isAndroid) {
+      throw Exception('Available only for Android');
+    }
+    try {
+      final result = await methodChannel.invokeMapMethod<String, dynamic>('piccApduTransmit', {'cmd': cmd});
       return result;
     } catch (e) {
       throw Exception('[MethodChannelError] ${e.toString()}');

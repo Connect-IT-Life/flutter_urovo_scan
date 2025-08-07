@@ -24,4 +24,8 @@ void main() {
   test('getPlatformVersion', () async {
     expect(await platform.getPlatformVersion(), '42');
   });
+
+  test('piccOpen', () async {
+    expect(await platform.piccOpen(), '42');
+  });
 }

@@ -25,12 +25,14 @@ class FlutterUrovoScanPlugin: FlutterPlugin, MethodCallHandler {
   private var eventSink: EventChannel.EventSink? = null
   private lateinit var helperUtil: HelperUtil
   private lateinit var scannerHelper: ScannerManagerHelper
+  private lateinit var piccHelper: PiccManagerHelper
 
   override fun onAttachedToEngine(flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
     Log.d("[TEST]", "FlutterUrovoScanPlugin: onAttachedToEngine")
     context = flutterPluginBinding.applicationContext
     scannerHelper = ScannerManagerHelper(context, this)
     helperUtil = HelperUtil(context)
+    piccHelper = PiccManagerHelper()
 
     // Set Method Channel
     channel = MethodChannel(flutterPluginBinding.binaryMessenger, "flutter_urovo_scan")
@@ -78,6 +80,26 @@ class FlutterUrovoScanPlugin: FlutterPlugin, MethodCallHandler {
       "getParameterInts" -> scannerHelper.getParameterInts(result)
       "startDecode" -> scannerHelper.startDecode(result)
       "stopDecode" -> scannerHelper.stopDecode(result)
+      "piccOpen" -> piccHelper.open(result)
+      "piccClose" -> piccHelper.close(result)
+      "piccRequest" -> {
+        val mode: String = call.argument<String>("mode") ?: "A"
+        piccHelper.request(mode, result)
+      }
+      "piccAntisel" -> piccHelper.antisel(result)
+      "piccActivate" -> piccHelper.activate(result)
+      "piccDeactivate" -> {
+        val mode: Int = call.argument<Int>("mode") ?: 0
+        piccHelper.deactivate(mode, result)
+      }
+      "piccApduTransmit" -> {
+        val cmd: ByteArray? = call.argument<ByteArray>("cmd")
+        if (cmd != null) {
+          piccHelper.apduTransmit(cmd, result)
+        } else {
+          result.error("ERROR", "cmd is null", null)
+        }
+      }
       else -> result.notImplemented()
     }
   }
