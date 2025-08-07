@@ -99,4 +99,28 @@ abstract class FlutterUrovoScanPlatform extends PlatformInterface {
   Future<Map<String, dynamic>?> piccApduTransmit(Uint8List cmd) {
     throw UnimplementedError('piccApduTransmit() has not been implemented.');
   }
+
+  Future<String?> iccOpen(int slot, int cardType, int volt) {
+    throw UnimplementedError('iccOpen() has not been implemented.');
+  }
+
+  Future<String?> iccClose() {
+    throw UnimplementedError('iccClose() has not been implemented.');
+  }
+
+  Future<String?> iccDetect() {
+    throw UnimplementedError('iccDetect() has not been implemented.');
+  }
+
+  Future<String?> iccActivate() {
+    throw UnimplementedError('iccActivate() has not been implemented.');
+  }
+
+  Future<Map<String, dynamic>?> iccApduTransmit(Uint8List cmd) {
+    throw UnimplementedError('iccApduTransmit() has not been implemented.');
+  }
+
+  Future<String?> iccDeactivate() {
+    throw UnimplementedError('iccDeactivate() has not been implemented.');
+  }
 }

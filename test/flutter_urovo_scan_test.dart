@@ -64,6 +64,24 @@ class MockFlutterUrovoScanPlatform
 
   @override
   Future<Map<String, dynamic>?> piccApduTransmit(Uint8List cmd) => Future.value({'rsp': [0], 'sw': [0,0]});
+
+  @override
+  Future<String?> iccOpen(int slot, int cardType, int volt) => Future.value('Success');
+
+  @override
+  Future<String?> iccClose() => Future.value('Success');
+
+  @override
+  Future<String?> iccDetect() => Future.value('Success');
+
+  @override
+  Future<String?> iccActivate() => Future.value('ATR');
+
+  @override
+  Future<Map<String, dynamic>?> iccApduTransmit(Uint8List cmd) => Future.value({'rsp': [0], 'sw': [0,0]});
+
+  @override
+  Future<String?> iccDeactivate() => Future.value('Success');
 }
 
 void main() {
@@ -166,5 +184,13 @@ void main() {
     FlutterUrovoScanPlatform.instance = fakePlatform;
 
     expect(await flutterUrovoScanPlugin.piccOpen(), 'Success');
+  });
+
+  test('iccOpen', () async {
+    FlutterUrovoScan flutterUrovoScanPlugin = FlutterUrovoScan();
+    MockFlutterUrovoScanPlatform fakePlatform = MockFlutterUrovoScanPlatform();
+    FlutterUrovoScanPlatform.instance = fakePlatform;
+
+    expect(await flutterUrovoScanPlugin.iccOpen(0,1,1), 'Success');
   });
 }

@@ -28,4 +28,8 @@ void main() {
   test('piccOpen', () async {
     expect(await platform.piccOpen(), '42');
   });
+
+  test('iccOpen', () async {
+    expect(await platform.iccOpen(0,1,1), '42');
+  });
 }

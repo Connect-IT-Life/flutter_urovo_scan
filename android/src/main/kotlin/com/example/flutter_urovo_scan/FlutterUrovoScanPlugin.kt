@@ -26,6 +26,7 @@ class FlutterUrovoScanPlugin: FlutterPlugin, MethodCallHandler {
   private lateinit var helperUtil: HelperUtil
   private lateinit var scannerHelper: ScannerManagerHelper
   private lateinit var piccHelper: PiccManagerHelper
+  private lateinit var iccHelper: IccManagerHelper
 
   override fun onAttachedToEngine(flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
     Log.d("[TEST]", "FlutterUrovoScanPlugin: onAttachedToEngine")
@@ -33,6 +34,7 @@ class FlutterUrovoScanPlugin: FlutterPlugin, MethodCallHandler {
     scannerHelper = ScannerManagerHelper(context, this)
     helperUtil = HelperUtil(context)
     piccHelper = PiccManagerHelper()
+    iccHelper = IccManagerHelper()
 
     // Set Method Channel
     channel = MethodChannel(flutterPluginBinding.binaryMessenger, "flutter_urovo_scan")
@@ -100,6 +102,24 @@ class FlutterUrovoScanPlugin: FlutterPlugin, MethodCallHandler {
           result.error("ERROR", "cmd is null", null)
         }
       }
+      "iccOpen" -> {
+        val slot: Int = call.argument<Int>("slot") ?: 0
+        val cardType: Int = call.argument<Int>("cardType") ?: 1
+        val volt: Int = call.argument<Int>("volt") ?: 1
+        iccHelper.open(slot, cardType, volt, result)
+      }
+      "iccClose" -> iccHelper.close(result)
+      "iccDetect" -> iccHelper.detect(result)
+      "iccActivate" -> iccHelper.activate(result)
+      "iccApduTransmit" -> {
+        val cmd: ByteArray? = call.argument<ByteArray>("cmd")
+        if (cmd != null) {
+          iccHelper.apduTransmit(cmd, result)
+        } else {
+          result.error("ERROR", "cmd is null", null)
+        }
+      }
+      "iccDeactivate" -> iccHelper.deactivate(result)
       else -> result.notImplemented()
     }
   }
